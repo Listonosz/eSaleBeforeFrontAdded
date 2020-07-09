@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eSale.Data;
 using eSale.Models;
+using eSale.ViewModels;
 
 namespace eSale.Controllers
 {

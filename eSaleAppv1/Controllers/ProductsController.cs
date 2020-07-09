@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using eSale.Data;
 using eSale.Models;
 using System.Data;
+using eSale.ViewModels;
+using System.ComponentModel.Design;
 
 namespace eSale.Controllers
 {
@@ -23,8 +25,8 @@ namespace eSale.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var eSaleDbContext = _context.Products.Include(p => p.Category);
-            return View(await eSaleDbContext.ToListAsync());
+            var ProductList = _context.Products.Include(p => p.Category);
+            return View(await ProductList.ToListAsync());
         }
 
         // GET: Products/Details/5
@@ -49,7 +51,6 @@ namespace eSale.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["CategoryName"] = new SelectList(_context.Categories, "CategoryName", "CategoryName");
             return View();
         }
 
@@ -58,7 +59,7 @@ namespace eSale.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,Name,Description,Price,DateAdded,DateSold,ImageUrl,ImageThumbnailUrl,IsOnSale,CategoryId")] Product product)
+        public async Task<IActionResult> Create([Bind("ProductId,Name,Description,Price,ImageUrl,ImageThumbnailUrl,IsOnSale,CategoryId")] Product product)
         {
             product.DateAdded = DateTime.Now;
             if (ModelState.IsValid)
@@ -67,10 +68,32 @@ namespace eSale.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Category"] = new SelectList(_context.Categories, "CategoryName", "CategoryName", product.CategoryId);
             return View(product);
         }
+        public ViewResult List(string category)
+        {
+            IEnumerable<Product> Products;
+            string currentCategory;
 
+            if (string.IsNullOrEmpty(category))
+            {
+                Products = _context.Products.OrderBy(c => c.ProductId);
+                currentCategory = "Wszystko";
+            }
+            else
+            {
+                Products = _context.Products.Where(c => c.Category.CategoryName == category);
+
+                currentCategory = _context.Categories.FirstOrDefault(c =>
+                c.CategoryName == category)?.CategoryName;
+            }
+            return View(new ProductListViewModel
+            {
+                Products = Products,
+                CurrentCategory = currentCategory
+            });
+
+        }
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

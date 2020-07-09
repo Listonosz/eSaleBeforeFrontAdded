@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jakub\\source\\repos\\eSaleFinal\\eSale\\eSale.csproj": {}
+    "C:\\Users\\Jakub\\source\\repos\\eSaleFinal\\eSale\\eSaleApp\\eSale.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jakub\\source\\repos\\eSaleFinal\\eSale\\eSale.csproj": {
+    "C:\\Users\\Jakub\\source\\repos\\eSaleFinal\\eSale\\eSaleApp\\eSale.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jakub\\source\\repos\\eSaleFinal\\eSale\\eSale.csproj",
+        "projectUniqueName": "C:\\Users\\Jakub\\source\\repos\\eSaleFinal\\eSale\\eSaleApp\\eSale.csproj",
         "projectName": "eSale",
-        "projectPath": "C:\\Users\\Jakub\\source\\repos\\eSaleFinal\\eSale\\eSale.csproj",
+        "projectPath": "C:\\Users\\Jakub\\source\\repos\\eSaleFinal\\eSale\\eSaleApp\\eSale.csproj",
         "packagesPath": "C:\\Users\\Jakub\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jakub\\source\\repos\\eSaleFinal\\eSale\\obj\\",
+        "outputPath": "C:\\Users\\Jakub\\source\\repos\\eSaleFinal\\eSale\\eSaleApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jakub\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -38,6 +38,14 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.5, )"
